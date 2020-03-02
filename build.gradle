@@ -9,6 +9,7 @@ buildscript {
         jcenter()
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://raw.github.com/pinchbv/android-analyzer/master/repo" }
+        maven { url "http://artifactory.phonepe.com/content/groups/public/" }
         
     }
     dependencies {
@@ -22,6 +23,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url "http://artifactory.phonepe.com/content/groups/public/" }
         google()
         jcenter()
         maven { url "https://plugins.gradle.org/m2/" }
