@@ -1,0 +1,6 @@
+projectKey=com.example.sonarexperiment-android
+serverUrl=http://localhost:9000
+serverVersion=8.1.0.31237
+dashboardUrl=http://localhost:9000/dashboard?id=com.example.sonarexperiment-android
+ceTaskId=AW-GY0h430s2rKIYm16v
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AW-GY0h430s2rKIYm16v
