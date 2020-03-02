@@ -26,41 +26,42 @@ export default class App extends Component<Props> {
 
     console.log("Created", props)
     this.state = {index: 1, url: 'https://i.picsum.photos/id/866/400/200.jpg'}
-    this.setState({index: 1, url : 'https://i.picsum.photos/id/866/400/200.jpg'})
+    // this.setState({index: 1, url : 'https://i.picsum.photos/id/866/400/200.jpg'})
     DeviceEventEmitter.addListener("setData", (data = []) => {
       console.log("Got an event", data)
-      console.log("this.props.viewIndex", this.props.viewIndex)
       var viewIdx = data[0]
-      if(this.props.viewIndex == viewIdx) {
+      var shownData = data[1]
+      var baseUrl = 'https://i.picsum.photos/id/866/400/200.jpg'
 
-        var shownData = data[1]
-        var baseUrl = 'https://i.picsum.photos/id/866/400/200.jpg'
-
+      if(this.props.viewIndex === viewIdx) {
         if(shownData % 4 == 0){
-            baseUrl = 'https://i.picsum.photos/id/10/400/200.jpg'
-        } else if(shownData % 4 == 1){
             baseUrl = 'https://i.picsum.photos/id/1000/400/200.jpg'
+        } else if(shownData % 4 == 1){
+            baseUrl = 'https://i.picsum.photos/id/10/400/200.jpg'
         } else if(shownData % 4 == 2){
             baseUrl = 'https://i.picsum.photos/id/100/400/200.jpg'
         } else if(shownData % 4 == 3){
             baseUrl = 'https://i.picsum.photos/id/1002/400/200.jpg'
         }
-
-        this.setState({index: shownData}, {url: baseUrl})
       }
+      this.setState({
+          index: shownData,
+          url: baseUrl
+      })
 
     })
   }
   render() {
     const subTitle = 'This is a subtitle text for this expriment.'
     const title = 'Sonar Experiment'
+    const {url = '', index} = this.state
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>ITEM: {this.state.index ?? 1}</Text>
+        <Text style={styles.welcome}>ITEM: {index ?? 1}</Text>
         <View style={styles.card}>
           <View style={styles.imageContainer}>
             <Image
-              source={{uri: this.state.url}}
+              source={{uri: url}}
               style={styles.imageStyle}
             />
           </View>
