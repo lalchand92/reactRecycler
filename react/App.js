@@ -25,8 +25,8 @@ export default class App extends Component<Props> {
     super(props)
 
     console.log("Created", props)
-    this.state = {index: 1}
-    this.setState({index: 1})
+    this.state = {index: 1, url: 'https://i.picsum.photos/id/866/400/200.jpg'}
+    this.setState({index: 1, url : 'https://i.picsum.photos/id/866/400/200.jpg'})
     DeviceEventEmitter.addListener("setData", (data = []) => {
       console.log("Got an event", data)
       console.log("this.props.viewIndex", this.props.viewIndex)
@@ -34,13 +34,24 @@ export default class App extends Component<Props> {
       if(this.props.viewIndex == viewIdx) {
 
         var shownData = data[1]
-        this.setState({index: shownData})
+        var baseUrl = 'https://i.picsum.photos/id/866/400/200.jpg'
+
+        if(shownData % 4 == 0){
+            baseUrl = 'https://i.picsum.photos/id/10/400/200.jpg'
+        } else if(shownData % 4 == 1){
+            baseUrl = 'https://i.picsum.photos/id/1000/400/200.jpg'
+        } else if(shownData % 4 == 2){
+            baseUrl = 'https://i.picsum.photos/id/100/400/200.jpg'
+        } else if(shownData % 4 == 3){
+            baseUrl = 'https://i.picsum.photos/id/1002/400/200.jpg'
+        }
+
+        this.setState({index: shownData}, {url: baseUrl})
       }
 
     })
   }
   render() {
-    const baseImage = 'https://i.picsum.photos/id/866/400/200.jpg'
     const subTitle = 'This is a subtitle text for this expriment.'
     const title = 'Sonar Experiment'
     return (
@@ -49,7 +60,7 @@ export default class App extends Component<Props> {
         <View style={styles.card}>
           <View style={styles.imageContainer}>
             <Image
-              source={{uri: baseImage}}
+              source={{uri: this.state.url}}
               style={styles.imageStyle}
             />
           </View>
