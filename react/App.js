@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, DeviceEventEmitter} from 'react-native';
+import {Platform, StyleSheet, Text, View, DeviceEventEmitter, Image} from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -40,9 +40,25 @@ export default class App extends Component<Props> {
     })
   }
   render() {
+    const baseImage = 'https://i.picsum.photos/id/866/400/200.jpg'
+    const subTitle = 'This is a subtitle text for this expriment.'
+    const title = 'Sonar Experiment'
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>ITEM: {this.state.index ?? 1}</Text>
+        <View style={styles.card}>
+          <View style={styles.imageContainer}>
+            <Image
+              source={{uri: baseImage}}
+              style={styles.imageStyle}
+            />
+          </View>
+          <View style={styles.textContainer}>
+              <Text style={styles.titleTextStyle}>{title}</Text>
+              <Text style={styles.subtitleTextStyle}>{subTitle}</Text>
+          </View>
+
+        </View>
       </View>
     );
   }
@@ -52,20 +68,39 @@ console.disableYellowBox = true
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'white',
+    width: 360,
+    padding: 8,
+    height: '100%'
+  },
+  subtitleTextStyle: {
+    color: 'rgba(0,0,0,0.4)'
+  },
+  titleTextStyle: {
+    fontSize: 16,
+    color: 'rgba(0,0,0,6)'
+  },
+  imageContainer: {
+    flex: 0.7
+  },
+  textContainer: {
+    flex: 0.3,
+    marginLeft: 8,
+    marginRight: 8
+  },
+  card: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    margin: 4,
+    flexDirection: 'row'
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  imageStyle: {
+    height: 160,
+    width: '100%'
+  }
 });
 
