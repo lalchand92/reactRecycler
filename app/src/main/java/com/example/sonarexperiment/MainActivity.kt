@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     private fun recyclerViewSetUp() {
         recyclerView =  findViewById(R.id.recycler_view)
         recyclerView!!.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recyclerView!!.adapter = RecyclerViewAdapter(getRecyclerViewData())
+        recyclerView!!.adapter = RecyclerViewAdapter(getRecyclerViewData(), this)
     }
 
     private fun getRecyclerViewData() : ArrayList<String>{
