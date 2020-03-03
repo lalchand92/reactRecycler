@@ -33,28 +33,38 @@ export default class App extends Component<Props> {
       var shownData = data[1]
       var baseUrl = 'https://i.picsum.photos/id/866/400/200.jpg'
 
+        console.log("Got an event", data)
+        console.log("shownData % 16", shownData%16)
       if(this.props.viewIndex === viewIdx) {
-        if(shownData % 4 == 0){
-            baseUrl = 'https://i.picsum.photos/id/1000/400/200.jpg'
-        } else if(shownData % 4 == 1){
+      if(shownData % 16 <= 3){
+                  baseUrl = 'https://i.picsum.photos/id/5/200/300.jpg'
+       }
+        else if(shownData % 16 <= 7){
+            baseUrl = 'https://i.picsum.photos/id/344/200/200.jpg'
+        } else if(shownData % 16 <= 11){
             baseUrl = 'https://i.picsum.photos/id/10/400/200.jpg'
-        } else if(shownData % 4 == 2){
-            baseUrl = 'https://i.picsum.photos/id/100/400/200.jpg'
-        } else if(shownData % 4 == 3){
-            baseUrl = 'https://i.picsum.photos/id/1002/400/200.jpg'
+        } else if(shownData % 16 <= 15){
+            baseUrl = 'https://i.picsum.photos/id/866/400/200.jpg'
         }
+
+        console.log("shownData % 16", shownData%16 + " index : " + shownData  + " baseUrl " + baseUrl)
+
+        this.setState({
+                  index: shownData,
+                  url: baseUrl
+              })
       }
-      this.setState({
-          index: shownData,
-          url: baseUrl
-      })
 
     })
   }
+
   render() {
-    const subTitle = 'This is a subtitle text for this expriment.'
-    const title = 'Sonar Experiment'
     const {url = '', index} = this.state
+    const subTitle = 'This is for ' + index
+        const title = 'Sonar Experiment for ' + index
+
+    console.log("url from render ", url + " index: " + index)
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>ITEM: {index ?? 1}</Text>
